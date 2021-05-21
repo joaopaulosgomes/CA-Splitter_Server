@@ -1,0 +1,26 @@
+<html>
+
+	<head>
+		<script>
+			async function fetchData(){
+				let searchText = document.getElementById("searchText").value
+				const fetchedRequest = await fetch(`http://localhost:8080/search?search=${searchText}`)
+				if(fetchedRequest.ok){
+					const bodyJSON = await fetchedRequest.json();
+					console.log(bodyJSON);
+					document.getElementById("searchResultsMessage").innerHTML = bodyJSON.message;
+					document.getElementById("searchResults").innerHTML = bodyJSON.resultsList;
+				}
+			} 
+		</script>
+	</head>
+
+	<body>
+		Search: <input type="text" id="searchText" /> <button onClick="fetchData()">Search</button>
+		<h1>Your results</h1>
+		<div id="searchResultsMessage"></div>
+		<div id="searchResults"></div>
+		
+	</body>
+
+</html>
